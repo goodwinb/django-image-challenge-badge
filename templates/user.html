@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<div><h2>{{ user.username }}</h2></div>
+<div><h3>Badges</h3></div>
+<div id="userBadges">
+	{% if badges %}
+	{% for badge in badges %}
+	<div class="badge">
+		<div class="badgeImage"><img src="{{ media_url }}{{ badge.badge_image.name }}"/></div>
+		<div class="badgeCaption">{{ badge.name }}</div>
+	</div>
+	{% endfor %}
+	{% else %}
+	<p>You don't have any badges.  Take a challenge to earn a badge.</p>
+	{% endif %}
+</div>
+{% if challenges %}
+{% include "challenges.html" %}
+{% else %}
+<div id="challenges"><h9>Challenges</h9><p>You don't have any challenges.</p></div>
+{% endif %}
+<div id="gallery">
+<div><h3>Gallery</h3></div>
+{% for pic in gallery.object_list %}
+<div class="gallery_it">
+		<a href="/?id={{ pic.id }}"><img src="{{ media_url }}{{ pic.thumbnail_large.name }}" alt="{{ pic.title }}" /></a>
+		<div class="galleryCaption"><h4>{{ pic.title }}</h4></div>
+</div>
+{% endfor %}
+</div>
+<div class="pagination">
+{% if gallery.has_previous %}
+	<div id="previous">
+		<a href="?page={{ gallery.previous_page_number }}" ><img src="{{ media_url }}/images/previous.png" alt="previous"></a>
+	</div>
+{% endif %}
+{% if gallery.has_next %}
+	<div id="next">
+		<a href="?page={{ gallery.next_page_number }}"><img src="{{ media_url}}/images/next.png" alt="next"/></a>
+    </div>
+{% endif %}
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<form enctype="multipart/form-data" method="post" action=".">
+	<table class="input-form">
+	{% if form.non_field_errors %}
+		<tr>
+			<td class="error">{{ form.non_field_errors|join:", "}}</td>
+		</tr>
+	{% endif %}
+		<fieldset>
+	{% if form.image.errors %}
+		<tr><td class="error">{{ form.image.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_image">Image</label></th>
+			<td>{{ form.image }}</td>
+		</tr>
+	{% if form.title.errors %}
+		<tr><td class="error">{{ form.title.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_title">Title</label></th>
+			<td>{{ form.title }}</td>
+		</tr>
+	{% if form.tags.errors %}
+		<tr><td class="error">{{ form.tags.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_tags">Tags</label></th>
+			<td>{{ form.tags }}</td>
+		</tr>		
+		</fieldset>
+	</table>
+	<input type="submit" value="upload" />
+</form>
+{% include "footer.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<script type="text/javascript" src="/site_media/js/scripts.js"></script>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="titleContainer"></div>
+<div class="siteContainer">
+	<div><p><h2>{{ msg }}</h2></p>
+	</div>
+	<div id="form">
+		<h2>Sign up for an account</h2>
+		<form method="post" action=".">
+			<table class="input-form">
+				{% if form.non_field_errors %}
+				<tr>
+					<td class="error">{{ form.non_field_errors|join:", "}}</td>
+				</tr>
+				{% endif %}
+				<fieldset>
+				{% if form.username.errors %}<tr><td class="error">{{ form.username.errors|join:", "}}</td></tr>{% endif %}
+				<tr>
+					<th><label for="id_username">Username</label></th>
+					<td>{{ form.username }}</td>
+				</tr>
+				{% if form.password1.errors %}<tr><td class="error">{{ form.password1.errors|join:", "}}</td></tr>{% endif %}
+				<tr>
+					<th><label for="id_password">Password</label></th>
+					<td>{{ form.password1 }}</td>
+				</tr>		
+				{% if form.password2.errors %}<tr><td class="error">{{ form.password2.errors|join:", "}}</td></tr>{% endif %}
+				<tr>
+					<th><label for="id_password">Password (again)</label></th>
+					<td>{{ form.password2 }}</td>
+				</tr>
+				{% if form.email.errors %}<tr><td class="error">{{ form.email.errors|join:", "}}</td></tr>{% endif %}
+				<tr>
+					<th><label for="id_email">Email</label></th>
+					<td>{{ form.email }}</td>
+				</tr>			
+				</fieldset>
+			</table>
+			<input type="submit" value="sign up" />
+		</form>
+		<p class="formInstructions">With an account you'll be take a challenge, make challenges for others, and upload images.</p>
+	</div>
+</div>
+{% endblock %}

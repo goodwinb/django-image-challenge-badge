@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<form id="challengeForm" method="post" action=".">
+	<table class="input-form">
+	{% if form.non_field_errors %}
+		<tr>
+			<td class="error">{{ form.non_field_errors|join:", "}}</td>
+		</tr>
+	{% endif %}
+		<fieldset>
+	{% if form.badge.errors %}
+		<tr><td class="error">{{ form.badge.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_badge">Badge</label></th>
+			<td>
+				<ul id="badgeList">
+				{% for badge in badges %}
+					<li><label for="id_badge_{{ forloop.counter }}">
+						<table>
+							<tr>
+								<td><input type="radio" id="id_badge_{{ forloop.counter }}" value="{{ badge.id }}" name="badge" /></td>
+								<td class="badgeName">{{ badge.name }}</td>
+								<td><img src="{{ media_url }}{{ badge.badge_image.name }}" /></td>
+							</tr>
+						</table>
+						</label>
+					</li>
+				{% endfor %}
+				</ul>
+			</td>
+		</tr>
+	{% if form.name.errors %}
+		<tr><td class="error">{{ form.name.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_name">Name</label></th>
+			<td>{{ form.name }}</td>
+		</tr>		
+		</fieldset>
+	</table>
+	<input type="submit" value="save" />
+</form>
+</div>
+{% endblock %}

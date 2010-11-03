@@ -1,0 +1,28 @@
+<div id="navBanner">
+	<div id="navMenu">
+		<div id="navNav">
+			<ul class="menu">
+				<li class="logo"><a href="/">Images Site</a></li>
+				<li><a href="/findchallenges/">challenges</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="/image_upload">upload</a></li>
+				<li><a href="/setup_challenge">setup challenge</a></li>
+				{% else %}
+				<li><a href="/login">log in</a></li>
+				{% endif %}
+			</ul>	
+		</div>
+		<div id="navUserInfo">
+			<ul class="navUserMenu">
+			{% if user.is_authenticated %}
+				<li><a href="/user/{{ user.username }}">{{ user.username }}</a> ({{ badgecount }} badges)</li>
+				{% for userbadge in userbadges %}
+				<li><img src="{{ media_url}}{{ userbadge.badge_image }}" alt="user badge"/></li>
+				{% endfor %}
+			{% else %}
+				<li>({{ badgecount }} badges) <a href="/signup">Sign up and start earning some here.</a></li>
+			{% endif %}			
+			</ul>
+		</div>
+	</div>
+</div>

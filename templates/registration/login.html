@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<script type="text/javascript" src="/site_media/js/scripts.js"></script>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<h2>Log In</h2>
+	<div id="form">
+		<form method="post" action=".">
+			<table class="input-form">
+				{% if form.non_field_errors %}
+				<tr>
+					<td class="error">Your username and password didn't match. Please try again.</td>
+					<td class="error">{{ form.non_field_errors|join:", "}}</td>
+				</tr>
+				{% endif %}
+				<fieldset>
+				<tr>
+					<th><label for="id_username">Username</label></th>
+					<td>{{ form.username }}</td>
+				</tr>
+				<tr>
+					<th><label for="id_password">Password</label></th>
+					<td>{{ form.password }}</td>
+				</tr>					
+				</fieldset>			
+			</table>
+	        <input type="hidden" name="next" value="/findchallenges/" />
+			<input type="submit" value="log in" />
+		</form>
+	</div>
+</div>
+{% endblock %}

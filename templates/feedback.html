@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<div id="form">
+    <form id="feedbackForm" method="post" action="">
+    	{% if feedback_form.non_field_errors %}
+    	<p><span class="error">{{ feedback_form.non_field_errors|join:", "}}</span></p>
+    	{% endif %}
+    	{% if feedback_form.message.errors %}
+    	<p><span class="error">{{ feedback_form.message.errors|join:", " }}</span></p>
+    	{% endif %}
+    	<p class="formLabel"><label class="labelM" for="id_message">Feedback Message</label>{{ feedback_form.message}}</p>
+    	{% if feedback_form.email.errors %}
+    	<p><span class="error">{{ feedback_form.email.errors|join:", " }}</span></p>
+    	{% endif %}
+    	<p class="formLabel"><label class="labelM" for="id_email">Email (optional)</label>{{ feedback_form.email}}</p>
+        <input type="submit" name="feedback" value="submit" id="submitFeedback"/>
+        {% if received %}
+        <p class="formInstructions">Thank you for your feedback.  You can return to <a href="/">home</a> page.</p>
+        {% endif %}
+    </form>
+</div>
+</div>
+{% endblock %}

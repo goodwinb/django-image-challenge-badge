@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<h2>Tag: {{ tag }}</h2>
+{% include "features.html" %}
+{% include "gallery.html" %}
+{% include "tags.html" %}
+</div>
+{% endblock %}

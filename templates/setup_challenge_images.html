@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<div id="challenge">
+	<h2>{{ challenge.name }}</h2>
+	<img src="{{ media_url }}{{ challenge.badge.badge_image }}"/>
+</div>
+<div id="search">
+	<h3>Search for Images to Add to Challenge</h3>
+	<form id="searchForm" method="post" action=".">
+	<table class="input-form">
+	{% if form.non_field_errors %}
+		<tr>
+			<td class="error">{{ form.non_field_errors|join:", "}}</td>
+		</tr>
+	{% endif %}
+		<fieldset>
+	{% if form.title.errors %}
+		<tr><td class="error">{{ form.title.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_image_title">Image Title</label></th>
+			<td>{{ form.title }}</td>
+		</tr>
+	{% if form.tag.errors %}
+		<tr><td class="error">{{ form.tag.errors|join:", "}}</td></tr>
+	{% endif %}
+		<tr>
+			<th><label for="id_name">Tag</label></th>
+			<td>{{ form.tag }}</td>
+		</tr>		
+		</fieldset>
+	</table>
+	<input type="submit" value="search" />
+	</form> 
+</div>
+<div id="searchResults">
+	{% for pic in pic_results.object_list %}
+	<div class="searchResult">
+		<div><img src="{{ media_url }}{{ pic.thumbnail_large.name }}" alt="{{ pic.title }}" /></div>
+		<div class="searchResultActions"><a href="/add/{{ pic.id }}/{{ challenge.id }}">+ add</a></div>
+	</div>
+	{% endfor %}
+	<div class="pagination">
+	{% if pic_results.has_previous %}
+		<div id="previous">
+			<a href="?page={{ pic_results.previous_page_number }}" ><img src="{{ media_url }}/images/previous.png" alt="previous"></a>
+		</div>
+	{% endif %}
+	{% if pic_results.has_next %}
+		<div id="next">
+			<a href="?page={{ pic_results.next_page_number }}"><img src="{{ media_url}}/images/next.png" alt="next"/></a>
+	    </div>
+	{% endif %}
+	</div>
+</div>	
+<div id="challengePreview">
+	{% if challenge_images %}
+	<h2>Preview: {{ challenge.title }}</h2>
+	{% endif %}
+	{% for challenge_image in challenge_images %}
+	<div class="challengeImagePreview">
+		<img src="{{ media_url }}{{ challenge_image.image.thumbnail_large.name }}"/>
+	</div>
+	<div class="challengeImageActions">
+		<a href="/move/up/{{ challenge_image.id }}">up</a>
+		<a href="/move/down/{{ challenge_image.id }}">down</a>
+		<a href="/remove/{{ challenge_image.id }}">remove</a>
+	</div>
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

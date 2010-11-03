@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Images Site{% endblock %}
+{% block head %}
+	<title>Images Site</title>
+{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<div class="siteContainer">
+<div id="challengeContainer">
+	<h2>Your challenge is: {{ challenge.name }}</h2>
+	<img src="{{ media_url }}{{ challenge.badge.badge_image }}" alt=""/>
+	<h4>{{ challenge.badge.name }}</h4>
+	<div class="pagination">
+	{% if challenge_images.has_previous %}
+		<div id="previous">
+			<a href="?page={{ challenge_images.previous_page_number }}" ><img src="{{ media_url }}/images/previous.png" alt="previous"></a>
+		</div>
+	{% endif %}
+	{% if challenge_images.has_next %}
+		<div id="next">
+			<a href="?page={{ challenge_images.next_page_number }}"><img src="{{ media_url}}/images/next.png" alt="next"/></a>
+	    </div>
+	{% endif %}
+	</div>
+	{% for challenge_image in challenge_images.object_list %}
+	<div class="challengeImage">
+		<h3>{{ challenge_image.title }}</h3>
+		<img src="{{ media_url }}{{ challenge_image.image.image.name }}" alt="{{ challenge_image.title }}" />
+	</div>
+	{% ifequal challenge_image.order challenge.number_of_images %}
+	<div id="challengeWin">
+		<div class="challengeWins"><a href="/win/{{ challenge.id }}">I Win</a></div>
+		<div class="challengeWins"><a href="/lose/{{ challenge.id }}/?msg=1">I Lose</a></div>
+	</div>
+	{% endifequal %}
+	{% endfor %}
+</div>
+</div>
+{% endblock %}

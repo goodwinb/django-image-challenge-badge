@@ -1,0 +1,7 @@
+This django project is an image sharing site that allows you to compose a collection of images as a challenge and reward users who view the challenge with badges.  Users can also vote on the popularity of challenges.
+
+REQUIREMENTS
+Django Tagging -- http://code.google.com/p/django-tagging/downloads/detail?name=django-tagging-0.3.1.tar.gz
+Python Image Library -- http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+Django easy-thumbnails -- http://github.com/SmileyChris/easy-thumbnails
+

@@ -1,0 +1,8 @@
+<div id="gallery">
+{% for pic in gallery %}
+<div class="galleryIt">
+	<a href="/tag/{{ tag }}/?id={{ pic.id }}"><img src="{{ media_url }}{{ pic.thumbnail_large.name }}" alt="{{ pic.title }}" /></a>
+	<h4>{{ pic.title }}</h4>
+</div>
+{% endfor %}
+</div>

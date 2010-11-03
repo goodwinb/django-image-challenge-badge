@@ -1,0 +1,18 @@
+<div class="pagination">
+{% if features.has_previous %}
+	<div id="previous">
+		<a href="?page={{ features.previous_page_number }}" ><img src="{{ media_url }}/images/previous.png" alt="previous"></a>
+	</div>
+{% endif %}
+{% if features.has_next %}
+	<div id="next">
+		<a href="?page={{ features.next_page_number }}"><img src="{{ media_url}}/images/next.png" alt="next"/></a>
+    </div>
+{% endif %}
+</div>
+{% for feature in features.object_list %}
+<div id="feature">
+	<img src="{{ media_url }}{{ feature.image.name }}" alt="{{ feature.title }}" />
+	<h6>{{ feature.title }}</h6>
+</div>
+{% endfor %} 

@@ -1,0 +1,23 @@
+<div id="challengeHead"><h2>Challenges</h2></div>
+<div id="challenges">
+{% for challenge in challenges %}
+	<div class="challenge">
+		<div class="challengeImage"><a href="/challenge/{{ challenge.id }}"><img src="{{ media_url}}{{ challenge.badge.badge_image }}" alt=""/></a></div>
+		<div class="challengeItem">
+			<div class="challengeTop">
+				<div class="challengeRank">{{ forloop.counter }}.</div>
+				<div class="challengeCaption"><a href="/challenge/{{ challenge.id }}">{{ challenge.name }}</a></div>
+			</div>
+			<div class="challengeBottom">
+				<div class="challengeStats">
+					{% if user.is_authenticated %}
+					<a href="/vote/{{ challenge.id }}/up">+</a> |
+					{% endif %}
+					<a href="/user/{{ challenge.user }}">{{ challenge.user }}</a> |
+					{{ challenge.number_of_images }} images
+				</div>			
+			</div>		
+		</div>
+	</div>
+{% endfor %}
+</div>
